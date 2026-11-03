@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/js/content.js", "destination": "/api/content", "permanent": false }
+  ]
+}
