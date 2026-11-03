@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>สำนักงานไปรษณีย์เขต 6</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+
+<div id="header"><div class="in">
+  <div id="logo"><a href="index.html"><img src="images/logo.png" width="44" height="44" alt="" /><span class="th">สำนักงานไปรษณีย์เขต 6</span><span class="en">REGIONAL POSTAL BUREAU (REGION 6)</span></a></div>
+  <ul id="nav">
+    <li><a href="index.html" class="on">หน้าหลัก</a></li>
+    <li><a href="#news">ข่าวประชาสัมพันธ์</a></li>
+    <li><a href="#dashboard">สรุปผลการดำเนินงาน</a></li>
+    <li><a href="#circular">หนังสือเวียน</a></li>
+    <li><a href="postal-systems.html">รวมระบบไปรษณีย์/คู่มือ</a></li>
+    <li><a href="phone-numbers.html">หมายเลขโทรศัพท์</a></li>
+    <li><a href="#" id="login-link">เข้าสู่ระบบ</a></li>
+  </ul>
+</div></div>
+
+<div id="hero">
+  <div class="photo"></div>
+  <div class="txt">
+    <div class="badge"><span class="dot">&nbsp;</span>REGIONAL POSTAL BUREAU (REGION 6)</div>
+    <h1>ขับเคลื่อนอนาคต Information Logistics</h1>
+    <p>ยกระดับการบริหารงานไปรษณีย์ด้วยนวัตกรรมดิจิทัล เชื่อมโยงข้อมูล ผสานเครือข่าย เพื่อบริการที่เหนือกว่า</p>
+  </div>
+  <div class="fade"></div>
+</div>
+
+<div class="section" id="news"><div class="wrap">
+  <div class="sec-head">
+    <div class="seg" id="news-seg">
+      <a href="#" onclick="return setNews('ทั่วไป', this);">ข่าวสารทั่วไป</a><a href="#" class="on" onclick="return setNews('ประชาสัมพันธ์', this);">ข่าวประชาสัมพันธ์</a>
+    </div>
+    <span class="pillbadge"><span class="dot">&nbsp;</span>Updates</span>
+    <h2>ข่าวประชาสัมพันธ์</h2>
+    <p>ติดตามข่าวสารและความเคลื่อนไหวล่าสุด</p>
+    <div class="clear"></div>
+  </div>
+  <div id="news-view"><div id="news-track"><div class="empty" style="width:1040px">กำลังโหลดข่าวสาร...</div></div></div>
+  <div class="slidebtns"><a href="#" onclick="return slide(-1);">&lsaquo;</a><a href="#" onclick="return slide(1);">&rsaquo;</a></div>
+</div></div>
+
+<div class="section gray" id="dashboard"><div class="wrap">
+  <div class="sec-head">
+    <div class="seg red" id="dash-seg">
+      <a href="#" class="on" onclick="return setDash(0, this);">รายได้ - รายจ่าย</a><a href="#" onclick="return setDash(1, this);">FUZE Post</a>
+    </div>
+    <a class="btn-white" id="dash-full" href="#">เปิดเต็มจอ</a>
+    <span class="pillbadge"><span class="dot">&nbsp;</span>Performance</span>
+    <h2>สรุปผลการดำเนินงาน</h2>
+    <div class="clear"></div>
+  </div>
+  <div class="dash-frame" id="dash-box"><div class="empty">กำลังโหลดข้อมูล...</div></div>
+</div></div>
+
+<div class="section" id="circular"><div class="wrap">
+  <div class="sec-head">
+    <span class="pillbadge"><span class="dot">&nbsp;</span>Official Documents</span>
+    <h2>หนังสือเวียนและคำสั่ง</h2>
+    <p>ค้นหาและดาวน์โหลดเอกสารประกาศ คำสั่ง เพื่อการปฏิบัติงาน</p>
+  </div>
+  <div class="docbox">
+    <div class="dochead">
+      <div class="searchbox"><span class="ic"></span><input type="text" id="circ-q" onkeyup="renderCirc();" onchange="renderCirc();" /></div>
+      <div class="selbox"><select id="circ-dept" onchange="renderCirc();"><option value="">ทุกส่วนงาน</option></select></div>
+      <div class="countbox" id="circ-count">พบข้อมูล <b>0</b> รายการ</div>
+      <div class="clear"></div>
+    </div>
+    <div class="doctable">
+      <table class="docs" cellspacing="0">
+        <thead><tr><th>หัวข้อเรื่อง / รายละเอียด</th><th class="c" width="120">ประเภท / วันที่</th><th class="c" width="90">ส่วนงาน</th><th class="c" width="90">ดาวน์โหลด</th></tr></thead>
+        <tbody id="circ-body"><tr><td colspan="4" class="empty">กำลังโหลดข้อมูล...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div></div>
+
+<div id="footer"><div class="wrap">
+  <div class="c1">
+    <div class="flogo"><img src="images/logo.png" width="44" height="44" alt="" /><div class="th">สำนักงานไปรษณีย์เขต 6</div><div class="en">REGIONAL POSTAL BUREAU (REGION 6)</div><div class="clear"></div></div>
+    <p class="desc">ศูนย์กลางการบริหารงานไปรษณีย์ พื้นที่ภาคกลางตอนล่าง มุ่งมั่นให้บริการด้วยมาตรฐานสากล เพื่อขับเคลื่อนเศรษฐกิจไทยและคุณภาพชีวิตที่ดีของสังคม</p>
+  </div>
+  <div class="c2"><h4>ลิงก์ที่เกี่ยวข้อง</h4><ul class="lk"><li><a href="#">เว็บไซต์ไปรษณีย์ไทย</a></li><li><a href="#">ระบบติดตามพัสดุ</a></li></ul></div>
+  <div class="c3"><h4>ติดต่อเรา</h4>
+    <div class="ct"><span class="ico pin"></span>54/17 หมู่ 1 ถนนพหลโยธิน ตำบลนครสวรรค์ออก<br />อำเภอเมืองนครสวรรค์ จังหวัดนครสวรรค์ 60000</div>
+    <div class="ct"><span class="ico tel"></span><span class="num">056-255262</span><br /><small>(ส่วนอำนวยการและบุคคล)</small></div>
+  </div>
+  <div class="clear"></div>
+  <div class="copy"><span class="r">Made with &hearts; by FAG<sup>2</sup></span>&copy; 2026 สำนักงานไปรษณีย์เขต 6 บริษัท ไปรษณีย์ไทย จำกัด</div>
+</div></div>
+
+<script type="text/javascript" src="js/data.js"></script>
+<script type="text/javascript" src="js/content.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
