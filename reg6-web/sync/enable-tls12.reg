@@ -1,0 +1,15 @@
+Windows Registry Editor Version 5.00
+
+; เปิดใช้ TLS 1.2 ฝั่งไคลเอนต์ สำหรับ Windows Server 2008 SP2
+; ต้องติดตั้งอัปเดต KB4019276 (Update to add support for TLS 1.1 and TLS 1.2 in Windows Server 2008 SP2) ก่อน
+; ดับเบิลคลิกไฟล์นี้ (ต้องเป็น Administrator) แล้วรีสตาร์ตเครื่อง
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client]
+"Enabled"=dword:00000001
+"DisabledByDefault"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\WinHttp]
+"DefaultSecureProtocols"=dword:00000800
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Internet Settings\WinHttp]
+"DefaultSecureProtocols"=dword:00000800
