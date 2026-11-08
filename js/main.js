@@ -19,8 +19,8 @@ function renderNews() {
   for (i = 0; i < newsList.length; i++) {
     n = newsList[i];
     html += '<div class="ncard"><a href="' + esc(n.url) + '">' +
-      (n.img ? '<img src="images/news/' + esc(n.img) + '" alt="' + esc(n.title) + '" /><span class="cap">' + esc(n.title) + '</span>' :
-               '<div class="ph">' + esc(n.title) + '<small>(ใส่รูปโปสเตอร์ใน images/news/ แล้วระบุชื่อไฟล์ใน js/data.js)</small></div>') +
+      (n.img ? '<img src="' + (/^https?:\/\//i.test(n.img) ? esc(n.img) : 'images/news/' + esc(n.img)) + '" alt="' + esc(n.title) + '" /><span class="cap">' + esc(n.title) + '</span>' :
+               '<div class="ph">' + esc(n.title) + '<small>(ยังไม่มีรูปโปสเตอร์)</small></div>') +
       '</a></div>';
   }
   if (newsList.length === 0) { html = '<div class="empty" style="width:1040px">ยังไม่มีข่าวในหมวดนี้</div>'; }
