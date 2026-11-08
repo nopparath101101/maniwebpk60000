@@ -18,7 +18,7 @@ function renderNews() {
   for (i = 0; i < NEWS.length; i++) { if (NEWS[i].cat === newsCat) { newsList.push(NEWS[i]); } }
   for (i = 0; i < newsList.length; i++) {
     n = newsList[i];
-    html += '<div class="ncard"><a href="' + esc(n.url) + '">' +
+    html += '<div class="ncard"><a href="' + esc(n.url || "#") + '"' + (/^https?:\/\//i.test(n.url || "") ? ' target="_blank"' : '') + '>' +
       (n.img ? '<img src="' + (/^https?:\/\//i.test(n.img) ? esc(n.img) : 'images/news/' + esc(n.img)) + '" alt="' + esc(n.title) + '" /><span class="cap">' + esc(n.title) + '</span>' :
                '<div class="ph">' + esc(n.title) + '<small>(ยังไม่มีรูปโปสเตอร์)</small></div>') +
       '</a></div>';
