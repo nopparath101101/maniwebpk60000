@@ -10,3 +10,8 @@ var ADMIN_URL = "https://webpk6.vercel.app/";
 
 /* แท็บ "รายงานผลการปฏิบัติงานประจำวัน" ในส่วนสรุปผลการดำเนินงาน: ฝังหน้าเว็บนี้แบบสด (โหลดใหม่จากต้นทางทุกครั้งที่เปิด) */
 var DAILY_REPORT = { name: "รายงานผลการปฏิบัติงานประจำวัน", url: "https://delivery-daily.vercel.app/" };
+
+/* ลิงก์เริ่มต้นของแท็บ Dashboard: ใช้เมื่อหน้า admin ยังไม่ได้ตั้งลิงก์ของแท็บชื่อนั้น (ถ้าตั้งที่ admin ไว้แล้ว จะใช้ค่าจาก admin) */
+var DASHBOARD_DEFAULTS = {
+  "รายได้ - รายจ่าย": "https://reg-6dashblardallnew-client-54l3.vercel.app/"
+};

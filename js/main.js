@@ -116,7 +116,13 @@ function renderDash() {
 }
 function setDash(i, el) { dashIdx = i; setOn($("dash-seg"), el); renderDash(); return false; }
 function initDash() {
-  var i;
+  var i, nm;
+  if (typeof DASHBOARD_DEFAULTS !== "undefined") {
+    for (i = 0; i < DASHBOARDS.length; i++) {
+      nm = DASHBOARDS[i].name;
+      if (!DASHBOARDS[i].url && DASHBOARD_DEFAULTS[nm]) { DASHBOARDS[i].url = DASHBOARD_DEFAULTS[nm]; }
+    }
+  }
   ensureDaily();
   dashIdx = 0;
   for (i = 0; i < DASHBOARDS.length; i++) { if (DASHBOARDS[i].url) { dashIdx = i; break; } }   /* เปิดแท็บแรกที่มีลิงก์ */
