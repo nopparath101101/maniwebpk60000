@@ -87,8 +87,22 @@ function slide(dir) {
   return false;
 }
 
-/* ---------- Dashboard ---------- */
+/* ---------- Dashboard (แท็บสร้างจากรายการ DASHBOARDS) ---------- */
 var dashIdx = 0;
+function ensureDaily() {
+  var i;
+  if (typeof DAILY_REPORT === "undefined" || !DAILY_REPORT.url) { return; }
+  for (i = 0; i < DASHBOARDS.length; i++) { if (DASHBOARDS[i].url === DAILY_REPORT.url) { return; } }
+  DASHBOARDS.push({ name: DAILY_REPORT.name, url: DAILY_REPORT.url });
+}
+function renderDashTabs() {
+  var seg = $("dash-seg"), i, html = "";
+  if (!seg) { return; }
+  for (i = 0; i < DASHBOARDS.length; i++) {
+    html += '<a href="#"' + (i === dashIdx ? ' class="on"' : '') + ' onclick="return setDash(' + i + ', this);">' + esc(DASHBOARDS[i].name) + '</a>';
+  }
+  seg.innerHTML = html;
+}
 function renderDash() {
   var box = $("dash-box"), d = DASHBOARDS[dashIdx] || { name: "", url: "" }, full = $("dash-full");
   if (!box) { return; }
@@ -96,11 +110,18 @@ function renderDash() {
     box.innerHTML = '<iframe src="' + esc(d.url) + '" frameborder="0" scrolling="auto"></iframe>';
     full.href = d.url; full.target = "_blank";
   } else {
-    box.innerHTML = '<div class="empty">ยังไม่ได้ตั้งค่าลิงก์ Dashboard "' + esc(d.name) + '" (แก้ที่ DASHBOARDS ในไฟล์ js/data.js)</div>';
-    full.href = "#";
+    box.innerHTML = '<div class="empty">ยังไม่ได้ตั้งค่าลิงก์ Dashboard "' + esc(d.name) + '" (ตั้งได้ที่หน้า admin เมนู Dashboard)</div>';
+    full.href = "#"; full.target = "";
   }
 }
 function setDash(i, el) { dashIdx = i; setOn($("dash-seg"), el); renderDash(); return false; }
+function initDash() {
+  var i;
+  ensureDaily();
+  dashIdx = 0;
+  for (i = 0; i < DASHBOARDS.length; i++) { if (DASHBOARDS[i].url) { dashIdx = i; break; } }   /* เปิดแท็บแรกที่มีลิงก์ */
+  renderDashTabs(); renderDash();
+}
 
 /* ---------- หนังสือเวียน ---------- */
 function deptClass(d) { var i; for (i = 0; i < DEPTS.length; i++) { if (DEPTS[i] === d) { return "dp" + ((i % 7) + 1); } } return "dp1"; }
@@ -182,7 +203,7 @@ function initLogin() {
   if (a && typeof ADMIN_URL !== "undefined" && ADMIN_URL) { a.href = ADMIN_URL; a.target = "_blank"; }
 }
 
-function init() { initLogin(); initDeptSelect(); renderNews(); renderDash(); renderCirc(); renderHub(); renderPhones(); }
+function init() { initLogin(); initDeptSelect(); renderNews(); initDash(); renderCirc(); renderHub(); renderPhones(); }
 if (window.addEventListener) { window.addEventListener("load", init, false); }
 else if (window.attachEvent) { window.attachEvent("onload", init); }
 else { window.onload = init; }
