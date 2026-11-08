@@ -18,7 +18,7 @@ function renderNews() {
   for (i = 0; i < NEWS.length; i++) { if (NEWS[i].cat === newsCat) { newsList.push(NEWS[i]); } }
   for (i = 0; i < newsList.length; i++) {
     n = newsList[i];
-    html += '<div class="ncard"><a href="' + esc(n.url || "#") + '"' + (/^https?:\/\//i.test(n.url || "") ? ' target="_blank"' : '') + '>' +
+    html += '<div class="ncard"><a href="' + esc(n.url || "#") + '"' + (/^https?:\/\//i.test(n.url || "") ? ' target="_blank"' : '') + (n.img ? ' onclick="return openNews(' + i + ');"' : '') + '>' +
       (n.img ? '<img src="' + (/^https?:\/\//i.test(n.img) ? esc(n.img) : 'images/news/' + esc(n.img)) + '" alt="' + esc(n.title) + '" /><span class="cap">' + esc(n.title) + '</span>' :
                '<div class="ph">' + esc(n.title) + '<small>(ยังไม่มีรูปโปสเตอร์)</small></div>') +
       '</a></div>';
@@ -28,6 +28,50 @@ function renderNews() {
   track.innerHTML = html;
   newsPos = 0; track.style.left = "0px";
 }
+/* ---------- ป๊อปอัปขยายรูปโปสเตอร์ข่าว ---------- */
+function newsImgSrc(img) { return /^https?:\/\//i.test(img) ? img : "images/news/" + img; }
+function lbSize() {
+  var d = document.documentElement, b = document.body;
+  return { w: window.innerWidth || d.clientWidth || b.clientWidth, h: window.innerHeight || d.clientHeight || b.clientHeight };
+}
+function openNews(i) {
+  var n = newsList[i], box = $("lb"), s = lbSize(), link = "", img;
+  if (!n || !n.img) { return true; }
+  if (!box) {
+    box = document.createElement("div");
+    box.id = "lb";
+    box.innerHTML = '<div class="lb-bg" onclick="closeNews();"></div><div class="lb-box" id="lb-box"></div>';
+    document.body.appendChild(box);
+  }
+  if (n.url && n.url !== "#") { link = '<a class="lb-link" href="' + esc(n.url) + '"' + (/^https?:\/\//i.test(n.url) ? ' target="_blank"' : '') + '>เปิดลิงก์ที่เกี่ยวข้อง</a>'; }
+  $("lb-box").innerHTML = '<a class="lb-x" href="#" onclick="return closeNews();" title="ปิด">&times;</a>' +
+    '<img id="lb-img" onload="lbCenter();" onerror="lbCenter();" src="' + esc(newsImgSrc(n.img)) + '" alt="' + esc(n.title) + '" />' +
+    '<div class="lb-cap">' + esc(n.title) + link + '</div>';
+  img = $("lb-img");
+  img.style.maxWidth = Math.max(200, s.w - 80) + "px";
+  img.style.maxHeight = Math.max(200, s.h - 150) + "px";
+  $("lb-box").style.visibility = "hidden";
+  $("lb-box").style.width = "auto";
+  box.style.display = "block";
+  return false;
+}
+function lbCenter() {
+  var b = $("lb-box"), im = $("lb-img");
+  if (!b || !im) { return; }
+  b.style.width = im.offsetWidth + "px";
+  b.style.marginLeft = -Math.round(b.offsetWidth / 2) + "px";
+  b.style.marginTop = -Math.round(b.offsetHeight / 2) + "px";
+  b.style.visibility = "visible";
+}
+function closeNews() {
+  var box = $("lb");
+  if (box) { box.style.display = "none"; $("lb-box").innerHTML = ""; }
+  return false;
+}
+function lbKey(e) { e = e || window.event; if (e && e.keyCode === 27) { closeNews(); } }
+if (document.addEventListener) { document.addEventListener("keydown", lbKey, false); }
+else if (document.attachEvent) { document.attachEvent("onkeydown", lbKey); }
+
 function setNews(cat, el) { newsCat = cat; setOn($("news-seg"), el); renderNews(); return false; }
 function slide(dir) {
   var max = newsList.length - 4, track = $("news-track"), target, cur, step;
