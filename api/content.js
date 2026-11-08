@@ -24,7 +24,7 @@ module.exports = async function handler(req, res) {
       throw new Error('unexpected payload');
     }
     // CDN ของ Vercel เก็บไว้ 5 นาที จึงไม่เรียก Supabase ทุกครั้งที่มีผู้เข้าชม
-    res.setHeader('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=3600');
+    res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=30, stale-while-revalidate=30');
     res.status(200).send(text);
   } catch (e) {
     res.setHeader('Cache-Control', 'no-store');
